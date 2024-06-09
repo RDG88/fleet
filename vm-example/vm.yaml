@@ -13,16 +13,10 @@ spec:
           - bus: usb
             name: input1
             type: tablet
-          hostDevices:
-          - name: usb-wifi
-            deviceName: kubevirt.io/usb-wifi
         machine:
           type: q35
         memory:
           guest: 2Gi
-        resources:
-          requests:
-            kubevirt.io/usb-wifi: 1
       volumes:
       - containerDisk:
           image: graafnet/ubuntu-kubevirt:latest
