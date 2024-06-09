@@ -1,32 +1,30 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  name: tumbleweed05
+  name: tumbleweed06
   namespace: default
 spec:
   runStrategy: Always
-  template:
-    spec:
-      domain:
-        devices:
-          inputs:
-          - bus: usb
-            name: input1
-            type: tablet
-          hostDevices:
-          - name: usb-wifi
-            deviceName: kubevirt.io/usb-wifi
-        machine:
-          type: q35
-        memory:
-          guest: 2Gi
-        resources:
-          requests:
-            kubevirt.io/usb-wifi: 1
-      volumes:
-      - containerDisk:
-          image: graafnet/ubuntu-kubevirt:latest
-        name: tumbleweed-ubntu-212
-      - cloudInitNoCloud:
-          userDataBase64: I2Nsb3VkLWNvbmZpZwpkaXNhYmxlX3Jvb3Q6IGZhbHNlCnNzaF9wd2F1dGg6IFRydWUKdXNlcnM6CiAgLSBkZWZhdWx0CiAgLSBuYW1lOiBzdXNlCiAgICBncm91cHM6IHN1ZG8KICAgIHNoZWxsOiAvYmluL2Jhc2gKICAgIHN1ZG86ICBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgICBsb2NrX3Bhc3N3ZDogRmFsc2UKICAgIHBsYWluX3RleHRfcGFzc3dkOiAnc3VzZScK
-        name: cloudinitdisk
+  domain:
+    devices:
+      inputs:
+      - bus: usb
+        name: input1
+        type: tablet
+      hostDevices:
+      - name: usb-wifi
+        deviceName: kubevirt.io/usb-wifi
+    machine:
+      type: q35
+    memory:
+      guest: 2Gi
+    resources:
+      requests:
+        kubevirt.io/usb-wifi: 1
+  volumes:
+  - containerDisk:
+      image: graafnet/ubuntu-kubevirt:latest
+    name: tumbleweed-ubntu-2121
+  - cloudInitNoCloud:
+      userDataBase64: I2Nsb3VkLWNvbmZpZwpkaXNhYmxlX3Jvb3Q6IGZhbHNlCnNzaF9wd2F1dGg6IFRydWUKdXNlcnM6CiAgLSBkZWZhdWx0CiAgLSBuYW1lOiBzdXNlCiAgICBncm91cHM6IHN1ZG8KICAgIHNoZWxsOiAvYmluL2Jhc2gKICAgIHN1ZG86ICBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgICBsb2NrX3Bhc3N3ZDogRmFsc2UKICAgIHBsYWluX3RleHRfcGFzc3dkOiAnc3VzZScK
+    name: cloudinitdisk
