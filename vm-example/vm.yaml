@@ -1,7 +1,7 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  name: tumbleweed04
+  name: tumbleweed05
   namespace: default
 spec:
   runStrategy: Always
@@ -26,7 +26,7 @@ spec:
       volumes:
       - containerDisk:
           image: graafnet/ubuntu-kubevirt:latest
-        name: tumbleweed-ubntu-21
+        name: tumbleweed-ubntu-212
       - cloudInitNoCloud:
           userDataBase64: I2Nsb3VkLWNvbmZpZwpkaXNhYmxlX3Jvb3Q6IGZhbHNlCnNzaF9wd2F1dGg6IFRydWUKdXNlcnM6CiAgLSBkZWZhdWx0CiAgLSBuYW1lOiBzdXNlCiAgICBncm91cHM6IHN1ZG8KICAgIHNoZWxsOiAvYmluL2Jhc2gKICAgIHN1ZG86ICBBTEw9KEFMTCkgTk9QQVNTV0Q6QUxMCiAgICBsb2NrX3Bhc3N3ZDogRmFsc2UKICAgIHBsYWluX3RleHRfcGFzc3dkOiAnc3VzZScK
         name: cloudinitdisk
