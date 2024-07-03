@@ -6,6 +6,8 @@ transactional-update register -r DE599FEAD6AAE0B1 -e rdegraaf@itq.nl
 
 
 ## MediaTek ID's
+dmesg | grep -i usb
+
 [    2.977240] usb 4-1: New USB device found, idVendor=0e8d, idProduct=7612, bcdDevice= 1.00
 [    2.977252] usb 4-1: New USB device strings: Mfr=2, Product=3, SerialNumber=4
 [    2.977256] usb 4-1: Product: Wireless 
