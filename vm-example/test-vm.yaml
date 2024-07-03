@@ -15,6 +15,9 @@ spec:
         cpu:
           cores: 2
         devices:
+          hostDevices:
+          - name: usb-wifi
+            deviceName: kubevirt.io/usb-mediatek-wifi
           disks:
             - name: containerdisk
               disk:
@@ -26,15 +29,18 @@ spec:
           - name: default
             masquerade: {}
         resources:
+          limits:
+            kubevirt.io/usb-mediatek-wifi: "1"
           requests:
             memory: 8192Mi
+            kubevirt.io/usb-mediatek-wifi: "1"
       networks:
       - name: default
         pod: {}
       volumes:
         - name: containerdisk
           containerDisk:
-            image: tedezed/ubuntu-container-disk:22.0
+            image: graafnet/ubuntu-kubevirt:latest
         - name: cloudinitdisk
           cloudInitNoCloud:
             userData: |-
