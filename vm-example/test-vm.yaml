@@ -1,0 +1,73 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: ubuntu-vm
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/size: small
+        kubevirt.io/domain: ubuntu-vm
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        devices:
+          disks:
+            - name: containerdisk
+              disk:
+                bus: virtio
+            - name: cloudinitdisk
+              disk:
+                bus: virtio
+          interfaces:
+          - name: default
+            masquerade: {}
+        resources:
+          requests:
+            memory: 8192Mi
+      networks:
+      - name: default
+        pod: {}
+      volumes:
+        - name: containerdisk
+          containerDisk:
+            image: tedezed/ubuntu-container-disk:22.0
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            userData: |-
+              #cloud-config
+              users:
+                - name: rob
+                  passwd: $6$rounds=4096$P0uvlB9.8nsiY67$uuOxYSk6n/74Ds3JtV1mT6xYjOguwTWgNmOeHvcHiQa9zan57l8dvfHE/zlu19fDmJGySNzLmh6K0R2I1AU9o0
+                  lock_passwd: false 
+                  shell: /bin/bash
+                  sudo: ALL=(ALL) ALL
+                  groups: [sudo]
+              ssh_pwauth: True
+        # - name: cloudinitdisk
+        #   cloudInitNoCloud:
+        #     userDataBase64: I2Nsb3VkLWNvbmZpZwp1c2VyczoKICAtIGRlZmF1bHQKICAtIG5hbWU6IHVidW50dQogICAgcGFzc3dkOiAicGFzd3JkIgogICAgc2hlbGw6IC9iaW4vYmFzaAogICAgbG9jay1wYXNzd2Q6IGZhbHNlCiAgICBzc2hfcHdhdXRoOiBUcnVlCiAgICBjaHBhc3N3ZDogeyBleHBpcmU6IEZhbHNlIH0KICAgIHN1ZG86IEFMTD0oQUxMKSBOT1BBU1NXRDpBTEwKICAgIGdyb3VwczogdXNlcnMsIGFkbWlu
+
+
+
+    #cloud-config
+    # bootcmd:
+    #   - |
+    #     echo 'network:' > /etc/netplan/50-cloud-init.yaml && \
+    #     echo '  version: 2' >> /etc/netplan/50-cloud-init.yaml && \
+    #     echo '  ethernets:' >> /etc/netplan/50-cloud-init.yaml && \
+    #     echo '    ens192:' >> /etc/netplan/50-cloud-init.yaml && \
+    #     echo '      dhcp4: yes' >> /etc/netplan/50-cloud-init.yaml && \
+    #     chmod 0600 /etc/netplan/50-cloud-init.yaml && \
+    #     netplan apply
+    # users:
+    #   - name: rob
+    #     passwd: $6$rounds=4096$P0uvlB9.8nsiY67$uuOxYSk6n/74Ds3JtV1mT6xYjOguwTWgNmOeHvcHiQa9zan57l8dvfHE/zlu19fDmJGySNzLmh6K0R2I1AU9o0
+    #     lock_passwd: false 
+    #     shell: /bin/bash
+    #     sudo: ALL=(ALL) ALL
+    #     groups: [sudo]
+    # ssh_pwauth: True
