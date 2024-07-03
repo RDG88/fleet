@@ -2,7 +2,7 @@ spec:
   configuration:
     permittedHostDevices:
       usb:
-        - resourceName: kubevirt.io/mediatek-wifi
+        - resourceName: kubevirt.io/usb-mediatek-wifi
           selectors:
             - vendor: "0e8d"
               product: "7612"
